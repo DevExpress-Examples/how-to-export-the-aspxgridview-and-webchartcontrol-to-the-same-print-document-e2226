@@ -2,8 +2,8 @@ using System;
 using System.IO;
 using DevExpress.XtraCharts;
 using DevExpress.XtraCharts.Native;
-using DevExpress.XtraPrinting;
 using DevExpress.XtraPrintingLinks;
+using DevExpress.XtraPrinting;
 
 public partial class _Default : System.Web.UI.Page {
     protected void Page_Load(object sender, EventArgs e) {
@@ -13,21 +13,21 @@ public partial class _Default : System.Web.UI.Page {
         Chart.SeriesTemplate.View = new StackedBarSeriesView();
     }
     protected void ExportButton_Click(object sender, EventArgs e) {
-        PrintingSystem ps = new PrintingSystem();
+        PrintingSystemBase ps = new PrintingSystemBase();
 
-        PrintableComponentLink link1 = new PrintableComponentLink(ps);
+        PrintableComponentLinkBase link1 = new PrintableComponentLinkBase(ps);
         link1.Component = GridExporter;
 
-        PrintableComponentLink link2 = new PrintableComponentLink(ps);
+        PrintableComponentLinkBase link2 = new PrintableComponentLinkBase(ps);
         Chart.DataBind();
         link2.Component = ((IChartContainer)Chart).Chart;
 
-        CompositeLink compositeLink = new CompositeLink(ps);
+        CompositeLinkBase compositeLink = new CompositeLinkBase(ps);
         compositeLink.Links.AddRange(new object[] { link1, link2 });
 
         compositeLink.CreateDocument();
         using (MemoryStream stream = new MemoryStream()) {
-            compositeLink.PrintingSystem.ExportToXls(stream);
+            compositeLink.PrintingSystemBase.ExportToXls(stream);
             Response.Clear();
             Response.Buffer = false;
             Response.AppendHeader("Content-Type", "application/xls");
