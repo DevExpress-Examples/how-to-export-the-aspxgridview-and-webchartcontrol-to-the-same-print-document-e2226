@@ -2,8 +2,8 @@
 Imports System.IO
 Imports DevExpress.XtraCharts
 Imports DevExpress.XtraCharts.Native
-Imports DevExpress.XtraPrinting
 Imports DevExpress.XtraPrintingLinks
+Imports DevExpress.XtraPrinting
 
 Partial Public Class _Default
     Inherits System.Web.UI.Page
@@ -15,21 +15,21 @@ Partial Public Class _Default
         Chart.SeriesTemplate.View = New StackedBarSeriesView()
     End Sub
     Protected Sub ExportButton_Click(ByVal sender As Object, ByVal e As EventArgs)
-        Dim ps As New PrintingSystem()
+        Dim ps As New PrintingSystemBase()
 
-        Dim link1 As New PrintableComponentLink(ps)
+        Dim link1 As New PrintableComponentLinkBase(ps)
         link1.Component = GridExporter
 
-        Dim link2 As New PrintableComponentLink(ps)
+        Dim link2 As New PrintableComponentLinkBase(ps)
         Chart.DataBind()
         link2.Component = DirectCast(Chart, IChartContainer).Chart
 
-        Dim compositeLink As New CompositeLink(ps)
+        Dim compositeLink As New CompositeLinkBase(ps)
         compositeLink.Links.AddRange(New Object() { link1, link2 })
 
         compositeLink.CreateDocument()
         Using stream As New MemoryStream()
-            compositeLink.PrintingSystem.ExportToXls(stream)
+            compositeLink.PrintingSystemBase.ExportToXls(stream)
             Response.Clear()
             Response.Buffer = False
             Response.AppendHeader("Content-Type", "application/xls")
