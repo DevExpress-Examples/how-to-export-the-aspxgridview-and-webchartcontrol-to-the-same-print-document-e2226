@@ -5,6 +5,9 @@
 * [Default.aspx.cs](./CS/WebSite/Default.aspx.cs) (VB: [Default.aspx.vb](./VB/WebSite/Default.aspx.vb))
 <!-- default file list end -->
 # How to export the ASPxGridView and WebChartControl to the same print document
+<!-- run online -->
+**[[Run Online]](https://codecentral.devexpress.com/e2226/)**
+<!-- run online end -->
 
 
 <p>This example illustrates how to export the ASPxGridView and WebChartControl to the same print document</p><p><strong>See Also:</strong><br />
